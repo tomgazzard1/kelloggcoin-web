@@ -3,7 +3,19 @@
 <!-- Step 1: List all transactions, starting with the ICO -->
 
 <ol>
-
+<%transactions = Transaction.all %>
+<% for transaction in transactions %>
+    <li>
+        <% amount = transaction["amount"] %>
+        <% from_name = User.find_by({"id" => transaction["from_user_id"]}) %>
+        <% to_name = User.find_by({"id" => transaction["to_user_id"]}) %>
+        <%if from_name %>
+        <%= amount %> KelloggCoin transferred from <%= from_name["name"] %> to <%= to_name["name"] %>
+        <%else%>
+        Initial coin offering: <%= amount %> to <%= to_name["name"] %>
+        <% end %>
+    </li>
+<% end %>
 </ol>
 
 <!-- Step 2: Calculate and display the balances -->
