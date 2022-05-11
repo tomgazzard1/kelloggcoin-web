@@ -25,21 +25,21 @@
 <% transactions = Transaction.all%>
 <% users = User.all %>
 
-
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Balance</th>
+    </tr>
 
 <% for user in users %>
     <tr>
         <% balance = 0 %>
         <% balance = balance - Transaction.where({"from_user_id" => user["id"]}).sum("amount") %>
         <% balance = balance + Transaction.where({"to_user_id" => user["id"]}).sum("amount") %>
-        <td><%=user["name"]%> balance is <%=balance%>  </td>
-
-
-<% ben_balance %>
-<% evan_balance %>
-<% anthony_balance %>
-<% krystina_balance %>
-
+        <td><%=user["name"]%></td>
+        <td><%=balance%> KC</td>
+    </tr>
+<%end%>
 
 <!-- 
 Expected balances:
